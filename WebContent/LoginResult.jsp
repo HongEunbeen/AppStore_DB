@@ -8,8 +8,6 @@
 <jsp:setProperty name="user" property="password" /> 
 
 
-
-
 <!DOCTYPE html>
 <html>
 	<head>
