@@ -105,7 +105,7 @@
 					<tbody>
 						<%
 							ArrayList<App> list = appDAO.getAllList(pageNumber, listSort);
-							String userCom = appDAO.getCompany(userID); System.out.println(userCom);
+							String userCom = appDAO.getCompany(userID);
 							for (int i = 0; i < list.size(); i++) {
 						%>
 							<tr>

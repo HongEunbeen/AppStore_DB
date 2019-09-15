@@ -6,15 +6,13 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 %>
-<jsp:useBean id="reivew" class="mirim.hs.kr.App" scope="page" />
-<jsp:setProperty name="app" property="title" />
-<jsp:setProperty name="app" property="category" />
-<jsp:setProperty name="app" property="content" />
-<jsp:setProperty name="app" property="icon" />
-<jsp:setProperty name="app" property="device" />
-<%
-	System.out.println(app);
-%>
+<jsp:useBean id="review" class="mirim.hs.kr.Review" scope="page" />
+<jsp:setProperty name="review" property="rtitle" />
+<jsp:setProperty name="review" property="rcontent" />
+<jsp:setProperty name="review" property="email" />
+<jsp:setProperty name="review" property="ano" />
+<jsp:setProperty name="review" property="star" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +23,10 @@
 <body>
 	<%
 		String userID = null;
-		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
-			userID = (String) session.getAttribute("userID");//유저아이디에 해당 세션값을 넣어준다.
+		if (session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
 		}
+		
 		if (userID == null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -36,29 +35,26 @@
 			script.println("</script>");
 		} else {
 
-			if (app.getTitle() == null|| app.getCategory() == null|| app.getContent() == null
-					 ||  app.getDevice() == null){
+			if (review.getEmail() == null || review.getRtitle() == null){
 				PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('입력이 안된 사항이 있습니다')");
 					script.println("history.back()");
 					script.println("</script>");
 			} else {
-				AppDAO appDAO = new AppDAO();
-				if(app.getIcon() == null){
-					app.setIcon("none");
-				}
-				int result = appDAO.enterApp(app.getTitle(), userID, app.getCategory() ,app.getContent(), app.getDevice(), app.getIcon());
+				ReviewDAO reviewDAO = new ReviewDAO();
+				int result = reviewDAO.enterReview(review.getRtitle(), review.getEmail(), review.getRcontent(), review.getAno(), review.getStar());
 				if (result == -1) {
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("alert('앱 등록을 실패했습니다')");
+					script.println("alert('리뷰등록에 실패하셨습니다.')");
 					script.println("history.back()");
 					script.println("</script>");
 				} else {
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href='AppList.jsp'");
+					script.println("alert('리뷰가 등록되었습니다.')");
+					script.println("location.href='AppInfo.jsp?ANO="+review.getAno()+"'");
 					script.println("</script>");
 				}
 

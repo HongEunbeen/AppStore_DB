@@ -57,6 +57,20 @@ public class AppDAO {
 		}
 		return false; 		
 	}
+	public int clickDown(int ano, String email) {
+		String SQL = "INSERT INTO APPDOWN(ANO, ACNT, EMAIL) VALUES (?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, ano);
+			pstmt.setInt(2, ano);
+			pstmt.setString(3, email);
+			return pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
 	
 	public App getApp(int ano) {
 		String SQL = "SELECT ANO, TITLE, EMAIL, TO_CHAR(CDATE, 'RR/MM/DD'), CATEGORY, CONTENT, COMPANY, ICON, DEVICE FROM APPINFO WHERE ANO = ?";
@@ -106,6 +120,7 @@ public class AppDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
+	
 	public String getDate() {
 		String SQL = "SELECT TO_CHAR(SYSDATE,'RR/MM/DD') FROM DUAL";
 		try {

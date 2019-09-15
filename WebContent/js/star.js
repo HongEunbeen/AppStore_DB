@@ -1,7 +1,7 @@
-$( document ).ready(function() {
-	$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  return false;
-	});
+$(document).ready(function(){
+	// With JQuery
+	$("#ex10").slider({});
+
+	// Without JQuery
+	var slider = new Slider("#ex10", {});
 });
