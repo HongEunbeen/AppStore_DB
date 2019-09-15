@@ -34,7 +34,7 @@
 				<li class="active"><a href="index.jsp">메인</a></li>
 				<li><a href="AppList.jsp">앱 목록</a></li>
 				<li><a href="ReviewList.jsp">리뷰 모아보기</a></li>
-				<li><a href="EnterApp.jsp">앱 추천받기</a></li>
+				<li><a href="Logout.jsp">앱 추천받기</a></li>
 				<%
 					if (userID == null) {
 				%>

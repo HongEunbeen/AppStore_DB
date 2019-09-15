@@ -74,16 +74,13 @@
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="2" style="background-color: #eeeeee; text-align: center;">앱 등록하기</th>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;"><%= app.getTitle() %></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>작성자</td>
 						<td><%=app.getEmail() %></td>
-					</tr>
-					<tr>
-						<td><%=app.getIcon() %></td>
 					</tr>
 					<tr>
 						<td>범주</td>
@@ -102,16 +99,59 @@
 						<td><%=app.getContent() %></td>
 					</tr>
 					<tr>
-						<td>별점</td>
-						<td><%=app.getRank() %></td>
-					</tr>
-					<tr>
 						<td>디바이스</td>
 						<td><%=app.getDevice() %></td>
 					</tr>
 				</tbody>
 			</table>	
 		</div>
+		<div class = "row">
+		<%
+			if(userID != null){
+		%>
+			<button class = "btn btn-primary btn-block" onclick="location.href='AppDown.jsp?<%=app.getNo()%>';">앱 다운받기</button>
+		<% 
+			}
+			else{
+		%>
+			<button class = "btn btn-primary btn-block" onclick="if(confirm('로그인을 해주세요'))location.href='Login.jsp';">앱 다운받기</button>
+		<%		
+			}
+		%>
+			
+			
+		</div>
+		<%
+			if(userID != null){
+		%>
+			<div class = "row">
+				<form method="post" action="WriteReviewResult.jsp">
+					<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan="2" style="background-color: #eeeeee; text-align: center;">댓글 작성하기</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="2"><input type="text" class="form-control" placeholder="댓글 제목" name="rtitle" maxlength="50"/></td>
+							</tr>
+							<tr>
+								<td><textarea class="form-control" placeholder="댓글 내용" name="rcontent" maxlength="100"></textarea></td>
+								<td><input type="number" class="form-control" placeholder="별점" name="star" min="1" max="100"/></td>
+							</tr>
+						</tbody>
+					</table>	
+					<input type="submit" class="btn btn-primary pull-right" value="댓글 작성하기" />
+				</form>
+			</div>
+		<% 
+			}
+			else{	
+				out.println("앱을 다운 받으면 댓글을 작성할 수 있습니다.");
+			}
+		%>
+		
 	</div>
 	<!-- 애니매이션 담당 JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

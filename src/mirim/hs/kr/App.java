@@ -8,12 +8,11 @@ public class App {
 	private String cdate;
 	private String category;
 	private String content;
-	private int rank;
 	private String company;
 	private String device;
 	private String icon;
 	
-	public App(int no, String title, String email, String cdate, String category, String content, int rank,
+	public App(int no, String title, String email, String cdate, String category, String content,
 			String company, String device, String icon) {
 		super();
 		this.no = no;
@@ -22,7 +21,6 @@ public class App {
 		this.cdate = cdate;
 		this.category = category;
 		this.content = content;
-		this.rank = rank;
 		this.company = company;
 		this.device = device;
 		this.icon = icon;
@@ -37,7 +35,6 @@ public class App {
 		this.cdate = cdate;
 		this.category = category;
 		this.content = content;
-		this.rank = rank;
 		this.company = company;
 		this.device = device;
 	}
@@ -48,7 +45,6 @@ public class App {
 		this.title = title;
 		this.category = category;
 		this.content = content;
-		this.rank = rank;
 		this.device = device;
 	}
 	
@@ -102,15 +98,6 @@ public class App {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-
 	public String getCompany() {
 		return company;
 	}

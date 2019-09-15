@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 %>
-<jsp:useBean id="app" class="mirim.hs.kr.App" scope="page" />
+<jsp:useBean id="reivew" class="mirim.hs.kr.App" scope="page" />
 <jsp:setProperty name="app" property="title" />
 <jsp:setProperty name="app" property="category" />
 <jsp:setProperty name="app" property="content" />

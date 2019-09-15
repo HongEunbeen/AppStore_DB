@@ -93,9 +93,6 @@
 							<td><textarea class="form-control" placeholder="앱 소개(링크)" name="content" maxlength="200"></textarea></td>
 						</tr>
 						<tr>
-							<td><input type="number" class="form-control" placeholder="별점" name="rank" min="0" max="100"/></td>
-						</tr>
-						<tr>
 							<td><input type="text" class="form-control" placeholder="아이콘" name="icon" maxlength="150"/></td>
 						</tr>
 						<tr>
