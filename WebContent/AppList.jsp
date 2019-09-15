@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="mirim.hs.kr.App"%>
 <%@page import="mirim.hs.kr.AppDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,27 +16,20 @@
 <title>jsp 게시판 웹사이트</title>
 </head>
 <body>
-<jsp:useBean id="apps" class="mirim.hs.kr.App" scope="request" />
-<jsp:setProperty name="apps" property="title" />
-<jsp:setProperty name="apps" property="email" /> 
-<jsp:setProperty name="apps" property="cdate" /> 
-<jsp:setProperty name="apps" property="category" /> 
-<jsp:setProperty name="apps" property="content" /> 
-<jsp:setProperty name="apps" property="device" /> 
 	<%
  		String userID = null;
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 			System.out.println(userID);
 		}
-		//int pageNumber = 1; //기본 페이지 넘버		
-		//if (request.getParameter("pageNumber") != null) {
-		//	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		//}
+		
+		int pageNumber = 1;
+		if (request.getParameter("pageNumber") != null) {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
  
 	%>
-
-	<!-- 네비게이션  -->
+<!-- 네비게이션  -->
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -44,101 +38,93 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">JSP 게시판</a>
+			<a class="navbar-brand" href="index.jsp">APP STORE</a>
 		</div>
 		<div class="collapse navbar-collapse" id="#bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li>
+				<li><a href="index.jsp">메인</a></li>
 				<li class="active"><a href="AppList.jsp">앱 목록</a></li>
-				<li><a href="ReviewList.jsp">리뷰 모아보기</a></li>
-				<li><a href="EnterApp.jsp">앱 등록하기</a></li>
-				<li><a href="MyInfo.jsp">마이 페이지</a></li>
-			</ul>
-			<%
-				//라긴안된경우
-			if (userID == null) {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+				<li><a href="RecomApp.jsp">리뷰 모아보기</a></li>
+				<li><a href="EnterApp.jsp">앱 추천받기</a></li>
+				<%
+					if (userID == null) {
+				%>
 						<li><a href="Login.jsp">로그인</a></li>
 						<li><a href="Join.jsp">회원가입</a></li>
-					</ul></li>
+				<%
+					} else {
+				%>
+					<li><a href="MyInfo.jsp">마이 페이지</a></li>
+				<%
+					}
+				%>
 			</ul>
-			<%
-				} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"
-				 role="button" aria-haspopup="true" aria-expanded="false">
-					회원관리<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="Logout.jsp">로그아웃</a></li>
-					</ul></li>
-			</ul>
-			<%
-				}
-			%>
 		</div>
 	</nav>
-	<!-- 게시판 -->
-	<div class="container">
-		<div class ="row">
-			<select class="form-control">
-				<option></option>
-				<option></option>
-				
-			</select>
-		</div>
-		<div class = "row">
-			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd"> 
-				<thead>
-					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">NO</th>
-						<th style="background-color: #eeeeee; text-align: center;">TITLE</th>
-						<th style="background-color: #eeeeee; text-align: center;">EMAIL</th>
-						<th style="background-color: #eeeeee; text-align: center;">CDATE</th>
-						<th style="background-color: #eeeeee; text-align: center;">CATEGORY</th>
-						<th style="background-color: #eeeeee; text-align: center;">CPMTEMT</th>
-						<th style="background-color: #eeeeee; text-align: center;">DEVICE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					
-					<% 
-					AppDAO appDAO = new AppDAO(); //인스턴스생성
-						App app = appDAO.setAllList();
-						out.println("<td>");
-			            	out.println(apps.getNo());
-			            out.println("</td>");
-			           	out.println("<td>");
-		            		out.println(apps.getTitle());
-		           		out.println("</td>");
-		           		out.println("<td>");
-			            	out.println(apps.getEmail());
-			            out.println("</td>");
-			           	out.println("<td>");
-		            		out.println(apps.getCdate());
-		           		out.println("</td>");	
-			           	out.println("<td>");
-		            		out.println(apps.getCategory());
-			           	out.println("</td>");
-			           	out.println("<td>");
-	            			out.println(apps.getDevice());
-           			out.println("</td>");
+		<div class="container">
+			<div class="row">
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th style="background-color: #eeeeee; text-align: center;">번호</th>
+							<th style="background-color: #eeeeee; text-align: center;">앱 이름</th>
+							<th style="background-color: #eeeeee; text-align: center;">개발자</th>
+							<th style="background-color: #eeeeee; text-align: center;">범주</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							AppDAO appDAO = new AppDAO();
+							ArrayList<App> list = appDAO.getAllList(pageNumber);
+							for (int i = 0; i < list.size(); i++) {
 						%>
-					</tr>
-				</tbody>
-			</table>	
-		</div>
-	</div>
-	<!-- 애니매이션 담당 JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<!-- 부트스트랩 JS  -->
-	<script src="js/bootstrap.js"></script>
-</body>
-</html>
+							<tr>
+								<td><%=(i+1)%></td>
+								<td><a href="AppInfo.jsp?ANO=<%=list.get(i).getNo()%>"><%=list.get(i).getTitle()%></a></td>
+								<td><%=list.get(i).getEmail()%></td>
+								<td><%=list.get(i).getCategory()%></td>
+							</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+				<!-- 페이지 넘기기 -->
+				<%
+					if (pageNumber != 1) {
+				%>
+						<a href="AppList.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arrow-left">줄이기</a>
+				<%
+					}
+					if (appDAO.nextPage(pageNumber)) {
+				%>
+						<a href="AppList.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arrow-left">더 보기</a>
+				<%
+					}
+				%>
+
+				<!-- 회원만넘어가도록 -->
+				<%
+					if (session.getAttribute("userID") != null) {
+				%>
+						<a href="EnterApp.jsp" class="btn btn-primary pull-right">앱 등록하기</a>
+				<%
+					} else {
+				%>
+						<button class="btn btn-primary pull-right"
+							onclick="if(confirm('로그인을 해주세요'))location.href='Login.jsp';"
+							type="button">앱 등록하기</button>
+				<%
+					}
+				%>
+	
+			</div>
+		</div>	
+		<!-- 애니매이션 담당 JQUERY -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<!-- 부트스트랩 JS  -->
+		<script src="js/bootstrap.js"></script>
+	
+	</body>
+	</html>
