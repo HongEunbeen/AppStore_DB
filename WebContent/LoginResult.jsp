@@ -16,15 +16,16 @@
 	</head>
 	<body>
 		<%
+			request.setCharacterEncoding("UTF-8");
 			UserDAO userDAO = new UserDAO(); //인스턴스생성
 			int result = userDAO.login(user.getEmail(), user.getPassword());
 			
 			//로그인 성공
 			if(result == 1){
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("<location.href = 'main.jsp'");
-				script.println("</script>");
+				session.setAttribute("userID", user.getEmail()); 
+				%>
+				<jsp:forward page = "index.jsp"/>
+				<%
 			}
 			//로그인 실패
 			else if(result == 0){

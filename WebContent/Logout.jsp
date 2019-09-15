@@ -8,9 +8,9 @@
 </head>
 <body>
 	<%
-		session.invalidate(); // 접속한 회원의 세션을 빼앗음
+		session.invalidate();
 	%>
-	<script>	//메인으로 이동
+	<script>
 		location.href = 'index.jsp';
 	</script>
 </body>

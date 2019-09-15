@@ -60,11 +60,15 @@
 							name="password" maxlength="20">
 					</div>
 					<div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호 확인"
+							name="password-hak" maxlength="20">
+					</div>
+					<div class="form-group">
 						<input type="text" class="form-control" placeholder="이름"
 							name="name" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="전화번호"
+						<input type="number" class="form-control" placeholder="전화번호"
 							name="phone" maxlength="20">
 					</div>
 					<div class="form-group">
@@ -72,7 +76,7 @@
 							name="company" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="회사 전화번호"
+						<input type="number" class="form-control" placeholder="회사 전화번호"
 							name="comphone" maxlength="20">
 					</div>
 					<div class="form-group" style="text-align: center;">
@@ -91,7 +95,7 @@
 					    <select class="form-control" id="age" name = "age">
 					      <%
 					      	for(int i = 0; i < 100; i++){
-					      		out.println("<option>" + i + "</option>");
+					      		out.println("<option value = '"+i+"'>" + i + "</option>");
 					      	}
 					      %>
 					    </select>

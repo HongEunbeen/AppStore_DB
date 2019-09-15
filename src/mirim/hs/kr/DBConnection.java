@@ -8,7 +8,7 @@ public class DBConnection
 	  public static Connection getConnection () {
 	        String user = "project3617";
 	        String pw = "1234";
-	        String url = "jdbc:oracle:thin:@10.96.124.213:1521:xe";
+	        String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	        Connection conn = null;
 	        
 	        try {
@@ -19,7 +19,7 @@ public class DBConnection
 	        }
 	        try {
 	            conn = DriverManager.getConnection(url, user, pw);
-	            System.out.println("¼º°ø");
+	            System.out.println("DB연결 성공");
 	        } catch (SQLException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();

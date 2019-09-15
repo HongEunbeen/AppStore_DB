@@ -23,22 +23,16 @@
 <jsp:setProperty name="apps" property="content" /> 
 <jsp:setProperty name="apps" property="device" /> 
 	<%
-/* 		String userID = null;
+ 		String userID = null;
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
+			System.out.println(userID);
 		}
-		int pageNumber = 1; //기본 페이지 넘버		
-		if (request.getParameter("pageNumber") != null) {
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		}
- */
-	%>
-<%
-		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
-		String userID = null;
-		if (session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
+		//int pageNumber = 1; //기본 페이지 넘버		
+		//if (request.getParameter("pageNumber") != null) {
+		//	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		//}
+ 
 	%>
 
 	<!-- 네비게이션  -->
@@ -54,8 +48,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="#bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="main.jsp">메인</a></li>
-				<li><a href="AppList.jsp">앱 목록</a></li>
+				<li><a href="main.jsp">메인</a></li>
+				<li class="active"><a href="AppList.jsp">앱 목록</a></li>
 				<li><a href="ReviewList.jsp">리뷰 모아보기</a></li>
 				<li><a href="EnterApp.jsp">앱 등록하기</a></li>
 				<li><a href="MyInfo.jsp">마이 페이지</a></li>

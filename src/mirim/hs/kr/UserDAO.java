@@ -12,30 +12,54 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	 
-	//»∏ø¯∞°¿‘
 	public int join(User user) {
-		String SQL = "INSERT INTO REGISTER(NAME, COMPANY, GENDER, EMAIL, PASSWORD, PHONE, COMPHONE, AGE) VALUES (?,?,?,?,?,?,?,?)";
+
+		String SQL = "INSERT INTO REGISTER (NAME, COMPANY, GENDER, AGE, EMAIL, PASSWORD, PHONE, COMPHONE) VALUES (?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
-
+		
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getCompany());
 			pstmt.setString(3, user.getGender());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getPassword());
-			pstmt.setString(6, user.getPhone());
-			pstmt.setString(7, user.getComphone());
-			pstmt.setString(8, user.getAge());
+			pstmt.setString(4, user.getAge());
+			pstmt.setString(5, user.getEmail());
+			pstmt.setString(6, user.getPassword());
+			pstmt.setString(7, user.getPhone());
+			pstmt.setString(8, user.getComphone());
+			
 			
 			return pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // DB ø¿∑˘
+		return -1;
 	}
 	
-	//∑Œ±◊¿Œ
+	public int join_user(User user) {
+
+		String SQL = "INSERT INTO REGISTER (NAME, COMPANY, GENDER, AGE, EMAIL, PASSWORD, PHONE, COMPHONE) VALUES (?,?,?,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+		
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, "");
+			pstmt.setString(3, user.getGender());
+			pstmt.setString(4, user.getAge());
+			pstmt.setString(5, user.getEmail());
+			pstmt.setString(6, user.getPassword());
+			pstmt.setString(7, user.getPhone());
+			pstmt.setString(8,"");
+			
+			
+			return pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public int login(String email, String password) {
 		String SQL = "SELECT PASSWORD FROM REGISTER WHERE EMAIL = ?";
 		try {
@@ -44,17 +68,19 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				if (rs.getString(1).equals(password)) {
-					return 1; // ∑Œ±◊¿Œ º∫∞¯
+					System.out.println("Î°úÍ∑∏Ïù∏ ÏôÑÎ£å");
+					return 1;
 				} else {
-					return 0; // ∫Òπ–π¯»£ ∫“¿œƒ°
+					System.out.println("ÎπÑÎ∞ÄÎ≤àÌò∏ Îã§Î¶Ñ");
+					return 0;
 				}
 					
 			}
-			return -1; // æ∆¿Ãµ æ¯¿Ω
+			return -1;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -2; // µ•¿Ã≈Õ∫£¿ÃΩ∫ ø¿∑˘∏¶ ¿«πÃ
+		return -2; 
 	}
 }
