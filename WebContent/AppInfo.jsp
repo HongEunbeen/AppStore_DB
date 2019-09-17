@@ -109,9 +109,16 @@
 		<div class = "row">
 		<%
 			if(userID != null){
+					if(userID.equals(app.getEmail())){
 		%>
-			<button class = "btn btn-primary btn-block" onclick="location.href='AppDown.jsp?<%=app.getNo()%>';">앱 다운받기</button>
+						<button class = "btn btn-success pull-right"" onclick="location.href='AppModify.jsp?ANO=<%=app.getNo()%>';">앱 정보 수정하기</button>
+						<button class = "btn btn-success pull-right"" onclick="location.href='AppDelete.jsp?ANO=<%=app.getNo()%>';">앱 삭제하기</button>
+		<%
+					}
+		%>
+					<button class = "btn btn-primary btn-block" onclick="location.href='AppDown.jsp?ANO=<%=app.getNo()%>';">앱 다운받기</button>
 		<% 
+						
 			}
 			else{
 		%>
@@ -123,7 +130,8 @@
 			
 		</div>
 		<%
-			if(userID != null){
+			AppDAO appDAO = new AppDAO();
+			if(appDAO.downReview(app.getNo(), userID)){
 		%>
 			<div class = "row">
 				<form method="post" action="WriteReviewResult.jsp">
@@ -186,9 +194,21 @@
 							<td colspan = "2">내용</td>
 							<td colspan = "4"><%=reviewList.get(i).getRcontent() %></td>
 						</tr>
+						<tr>
+							<td colspan = "6"><%
+									if(userID != null){
+										if(userID.equals(reviewList.get(i).getEmail())){
+									%>
+											<button class = "btn btn-success pull-right" onclick="location.href='ReviewDelete.jsp?RNO=<%=reviewList.get(i).getRno()%>';">리뷰 삭제하기</button>
+									<%
+										}		
+									}%>
+							</td>
+						</tr>
 					<%} %>
 					</tbody>
-				</table>	
+				</table>
+					
 			</div>
 		<%} %>
 	</div>

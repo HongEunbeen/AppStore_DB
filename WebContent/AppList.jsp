@@ -51,19 +51,17 @@
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
 				<li class="active"><a href="AppList.jsp">앱 목록</a></li>
-				<li><a href="RecomApp.jsp">리뷰 모아보기</a></li>
-				<li><a href="Logout.jsp">앱 추천받기</a></li>
+				<li><a href="SearchApp.jsp">앱 검색하기</a></li>
+				<li><a href="RecommApp.jsp">앱 추천받기</a></li>
 				<%
 					if (userID == null) {
-						System.out.println(userID);
 				%>
 						<li><a href="Login.jsp">로그인</a></li>
 						<li><a href="Join.jsp">회원가입</a></li>
 				<%
 					} else {
-						System.out.println(userID);
 				%>
-						<li><a href="MyInfo.jsp">마이 페이지</a></li>
+					<li><a href="MyInfo.jsp">마이 페이지</a></li>
 				<%
 					}
 				%>
@@ -100,6 +98,7 @@
 							<th style="background-color: #eeeeee; text-align: center;">개발자</th>
 							<th style="background-color: #eeeeee; text-align: center;">회사명</th>
 							<th style="background-color: #eeeeee; text-align: center;">범주</th>
+							<th style="background-color: #eeeeee; text-align: center;">별점</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,6 +113,7 @@
 								<td><%=list.get(i).getEmail()%></td>
 								<td><%=list.get(i).getCompany()%></td>
 								<td><%=list.get(i).getCategory()%></td>
+								<td><%if(appDAO.getStar(list.get(i).getNo()) == -1){%>0<%}else{%><%=appDAO.getStar(list.get(i).getNo()) %><%} %></td>
 							</tr>
 						<%
 							}

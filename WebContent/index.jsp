@@ -1,3 +1,5 @@
+<%@page import="mirim.hs.kr.Count"%>
+<%@page import="mirim.hs.kr.CountDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
@@ -33,8 +35,8 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.jsp">메인</a></li>
 				<li><a href="AppList.jsp">앱 목록</a></li>
-				<li><a href="ReviewList.jsp">리뷰 모아보기</a></li>
-				<li><a href="Logout.jsp">앱 추천받기</a></li>
+				<li><a href="SearchApp.jsp">앱 검색하기</a></li>
+				<li><a href="RecommApp.jsp">앱 추천받기</a></li>
 				<%
 					if (userID == null) {
 				%>
@@ -50,6 +52,40 @@
 			</ul>
 		</div>
 	</nav>
+	<div class="container">
+		<div class = "row">
+			<div class="jumbotron">
+		    <h1>App Store</h1>
+		    <p>앱을 다운받을 수 있는 페이지 입니다.</p>
+		  </div>
+		</div>
+		<div class="row">
+		<%
+			CountDAO countDAO = new CountDAO();
+			Count count_register = countDAO.getCount("REGISTER");
+			Count count_app = countDAO.getCount("APP");
+			Count count_review = countDAO.getCount("REVIEW");
+		%>
+		  	<div class="col-sm-4">
+		     	<div class="panel panel-primary">
+      				<div class="panel-heading">총 회원 수</div>
+      				<div class="panel-body"><%=count_register.getCnt() %></div>
+    			</div>
+		   	</div>
+			<div class="col-sm-4">
+			     <div class="panel panel-primary">
+      				<div class="panel-heading">총 등록된 APP 수</div>
+      				<div class="panel-body"><%=count_app.getCnt() %></div>
+    			</div>
+			</div>
+			<div class="col-sm-4">
+		  		<div class="panel panel-primary">
+      				<div class="panel-heading">총 작성된 REVIEW 수</div>
+      				<div class="panel-body"><%=count_review.getCnt() %></div>
+    			</div>
+	    	</div>
+		</div>
+	</div>
 
 	<!-- 애니매이션 담당 JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
